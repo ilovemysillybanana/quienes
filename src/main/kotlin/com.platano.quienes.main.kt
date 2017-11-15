@@ -1,4 +1,5 @@
 import platform.linux.linux as Linux
+import platform.windows.windows as Windows
 
 /**
  * Created by jose on 10/26/17.
