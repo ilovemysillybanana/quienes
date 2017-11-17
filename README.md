@@ -11,7 +11,8 @@ I was inspired to create this over a weekend when parsing horrible amounts of te
 * Never cry again
 
 ### Working
-* Linux 
+* Linux
+* Windows
 
 ### Instructions
 Run the jar as if it were any other java application, you can send the output anywhere you'd like using standard terminal functions.
