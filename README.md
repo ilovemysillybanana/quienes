@@ -70,6 +70,7 @@ java -jar quienes.jar > output.json
     "postgres": ["ssl-cert", "postgres"],
     "sbt": ["sbt"],
     "openldap": ["openldap"],
-    "rundeck": ["rundeck"],
+    "rundeck": ["rundeck"]
   }
-  ```
+}
+```
