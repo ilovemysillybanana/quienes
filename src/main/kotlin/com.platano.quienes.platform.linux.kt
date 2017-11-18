@@ -92,8 +92,8 @@ class linux {
             json_data += json_group_data.dropLast(1) + "],"
         }
 
-        println(json_data + "}")
-        return json_data + "}"
+        println(json_data.dropLast(1) + "}}")
+        return json_data.dropLast(1) + "}}"
     }
 
 }
