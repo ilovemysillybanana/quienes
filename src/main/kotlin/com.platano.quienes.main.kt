@@ -1,5 +1,6 @@
 import platform.linux.linux as Linux
 import platform.windows.windows as Windows
+import platform.unix.unix as Unix
 import kotlin.text.Regex
 
 /**
@@ -13,10 +14,12 @@ fun main(args: Array<String>){
     val regsol = Regex(".*Solaris.*")
     val regaix = Regex(".*AIX.*")
 
+    //at this time the unix files all seem to be the same, it is checking /etc/passwd and /etc/passwrd.
+
     when {
-        regaix.matches(opsys)    -> println("AIX Test")
-        reglin.matches(opsys)    -> Linux().getFinishedData()
-        regsol.matches(opsys)    -> println("Solaris Test")
+        regaix.matches(opsys)    -> Unix().getFinishedData()
+        reglin.matches(opsys)    -> Unix().getFinishedData()
+        regsol.matches(opsys)    -> Unix().getFinishedData()
         regwin.matches(opsys)    -> Windows().getFinishedData()
         else -> {
             println("Operating System: $opsys")
