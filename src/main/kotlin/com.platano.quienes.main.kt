@@ -11,7 +11,7 @@ fun main(args: Array<String>){
     val opsys = System.getProperty("os.name")
     val regwin = Regex(".*Windows.*")
     val reglin = Regex(".*Linux.*")
-    val regsol = Regex(".*Solaris.*")
+    val regsol = Regex(".*SunOS.*") //Solaris systems return SunOS from OS Name
     val regaix = Regex(".*AIX.*")
 
     //at this time the unix files all seem to be the same, it is checking /etc/passwd and /etc/passwrd.
