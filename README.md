@@ -2,19 +2,25 @@
 
 Why this name? For those of you who took a language in high school, it might be obvious. For those did not, it just means, "who" in Spanish.
 
-### Why does this exist?
+## Why does this exist?
+
 I was inspired to create this over a weekend when parsing horrible amounts of text given to a colleague and myself from multiple platforms using multiple methods that generated differing outputs. These files were just different enough to bring us great heartache.
 
-### Goals
-* Support AIX, Windows, Solaris, and Linux Operating Systems
-* Return the output in a neatly formatted JSON File
-* Never cry again
+## Goals
 
-### Working
-* Linux
-* Windows
+- Support AIX, Windows, Solaris, and Linux Operating Systems
+- Return the output in a neatly formatted JSON File
+- Never cry again
 
-### Instructions
+## Working
+
+- AIX? ( I am not able to test this. )
+- Linux
+- Solaris
+- Windows
+
+## Instructions
+
 Run the jar as if it were any other java application, you can send the output anywhere you'd like using standard terminal functions.
 
 ```
@@ -23,7 +29,8 @@ java -jar quienes.jar
 java -jar quienes.jar > output.json
 ```
 
-### Expected Output
+## Expected Output
+
 ```
 {
   "userdata": {
@@ -74,3 +81,7 @@ java -jar quienes.jar > output.json
   }
 }
 ```
+
+## Contributions
+
+If you're interested in this project, you can help by writing tests, testing on different platforms, sending issues. Really any and all help is appreciated. Let's never cry again together. 
