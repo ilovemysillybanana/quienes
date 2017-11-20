@@ -21,16 +21,34 @@ I was inspired to create this over a weekend when parsing horrible amounts of te
 
 ## Instructions
 
-Run the jar as if it were any other java application, you can send the output anywhere you'd like using standard terminal functions.
+Run the jar as if it were any other java application, you can send the output anywhere you'd like using standard terminal functions. You can specify an input file to designate groups with differing permissions and have that be reflected in your output.
 
 ```
 java -jar quienes.jar
 # redirect output
 java -jar quienes.jar > output.json
 ```
+#### specify input file
+
+```
+java -jar quienes.jar -f /path/to/file
+```
+
+#### Example Input File
+Input files are in json format, it is expected that the team(s) running these should be able to categorize and their privileged users and groups.
+
+```
+{
+  "elevated_groups": ["root", "jose"],
+  "elevated_users": ["root", "rundeck", "jose"]
+}
+```
+
+Each user will return an array of `elevated_groups`, if they belong to any. If they do not, but their name is contained by the group `elevated_users` they will return an `elevated_user: true`
 
 ## Expected Output
 
+#### Without Input File
 ```
 {
   "userdata": {
@@ -84,4 +102,4 @@ java -jar quienes.jar > output.json
 
 ## Contributions
 
-If you're interested in this project, you can help by writing tests, testing on different platforms, sending issues. Really any and all help is appreciated. Let's never cry again together. 
+If you're interested in this project, you can help by writing tests, testing on different platforms, sending issues. Really any and all help is appreciated. Let's never cry again together.
