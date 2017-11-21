@@ -11,6 +11,7 @@ fun main(args: Array<String>){
     val opsys = System.getProperty("os.name")
     val regwin = Regex(".*Windows.*")
     val reglin = Regex(".*Linux.*")
+    val regmac = Regex(".*Mac.*")
     val regsol = Regex(".*SunOS.*") //Solaris systems return SunOS from OS Name
     val regaix = Regex(".*AIX.*")
 
@@ -19,6 +20,7 @@ fun main(args: Array<String>){
     when {
         regaix.matches(opsys)    -> Unix().getFinishedData()
         reglin.matches(opsys)    -> Unix().getFinishedData()
+        regmac.matches(opsys)    -> Unix().getFinishedData()
         regsol.matches(opsys)    -> Unix().getFinishedData()
         regwin.matches(opsys)    -> Windows().getFinishedData()
         else -> {

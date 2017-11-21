@@ -14,7 +14,12 @@ class unix {
         val userNames = mutableListOf<String>()
         val inputStream: InputStream = File(usersFile).inputStream()
 
-        inputStream.bufferedReader().useLines { lines -> lines.forEach { userNames.add(it.split(":")[0]) } }
+        inputStream.bufferedReader().useLines {
+            lines -> lines.forEach {
+            if ( !it.contains('#') ) {
+                userNames.add(it.split(":")[0])
+            } }
+        }
 
         //for a more complete list of users, we'll scan the groups list for additional users as well
         val groupsFile = "/etc/group"
