@@ -1,0 +1,4 @@
+{
+  "elevated_groups": ["rundeck", "jose"],
+  "elevated_users": ["root", "rundeck", "jose"]
+}
