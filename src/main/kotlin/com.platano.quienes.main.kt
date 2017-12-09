@@ -29,12 +29,12 @@ fun main(args: Array<String>){
     }
 
 
-    if (!arguments.data.isNullOrBlank()) {
+    if (arguments.data.isNullOrBlank().not()) {
         when {
-            regaix.matches(opsys)    -> Nix().getFinishedData(arguments.data)
-            reglin.matches(opsys)    -> Nix().getFinishedData(arguments.data)
-            regmac.matches(opsys)    -> Nix().getFinishedData(arguments.data)
-            regsol.matches(opsys)    -> Nix().getFinishedData(arguments.data)
+            regaix.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
+            reglin.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
+            regmac.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
+            regsol.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
             regwin.matches(opsys)    -> Windows().getFinishedData()
             else -> {
                 println("Operating System: $opsys")
