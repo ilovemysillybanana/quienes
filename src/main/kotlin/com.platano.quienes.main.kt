@@ -35,7 +35,7 @@ fun main(args: Array<String>){
             reglin.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
             regmac.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
             regsol.matches(opsys)    -> Nix().getFinishedData(arguments.data!!)
-            regwin.matches(opsys)    -> Windows().getFinishedData()
+            regwin.matches(opsys)    -> Windows().getFinishedData(arguments.data!!)
             else -> {
                 println("Operating System: $opsys")
                 println("Sorry this system is not supported by this program. :(")

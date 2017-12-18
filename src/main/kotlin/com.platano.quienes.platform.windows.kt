@@ -3,7 +3,13 @@
  */
 package platform.windows
 
+import com.beust.klaxon.JsonArray
+import com.beust.klaxon.JsonObject
+import com.beust.klaxon.Parser
+import com.beust.klaxon.array
 import java.io.BufferedReader
+import java.io.File
+import java.io.InputStream
 import java.io.InputStreamReader
 
 class windows {
@@ -53,7 +59,6 @@ class windows {
         val groups = mutableMapOf<String, MutableList<String>>()
 
         users.forEach {
-            println("This is the user: $it")
 
             //run command to get output
             val user_group_data = console("net user $it")
@@ -80,7 +85,6 @@ class windows {
             }
             groups.put(name, lsGroupData)
         }
-        println(groups)
         return groups
     }
 
@@ -103,8 +107,63 @@ class windows {
         jsonData = jsonData.dropLast(1)
         jsonData += "}}"
 
-        println(jsonData)
-        return "FOO"
+        return jsonData
+    }
+
+    fun jsonify(groups_data: MutableMap<String, MutableList<String>>, elevated_users: JsonArray<String>, elevated_groups: JsonArray<String>): String{
+        var json_data = "{ \"userdata\": {"
+
+        groups_data.forEach {
+            var data = "\"${it.key}\": {"
+            var egroups = mutableListOf<String>() //elevated group memberships
+            var pgroups = mutableListOf<String>() //regular group memberships
+
+            //find if priv user
+            if (it.key in elevated_users){
+                data += "\"elevated_user\": true,"
+            } else {
+                data += "\"elevated_user\": false,"
+            }
+
+            it.value.forEach {
+                if (it in elevated_groups){
+                    egroups.add(it)
+                } else {
+                    pgroups.add(it)
+                }
+            }
+
+            if (egroups.size == 0) {
+                data += "\"elevated_groups\": [],"
+            } else {
+                data += "\"elevated_groups\": ["
+                egroups.forEach {
+                    data += "\"$it\","
+                }
+                data = data.dropLast(1)
+                data += "],"
+            }
+
+            if (pgroups.size == 0) {
+                data += "\"normal_groups\": [],"
+            } else {
+                data += "\"normal_groups\": ["
+                pgroups.forEach {
+                    data += "\"$it\","
+                }
+                data = data.dropLast(1)
+                data += "],"
+            }
+
+            data = data.dropLast(1)
+            data += "},"
+            json_data += data
+
+        }
+
+        json_data = json_data.dropLast(1)
+        json_data += "}}"
+        return json_data
     }
 
     fun getFinishedData(){
@@ -113,6 +172,21 @@ class windows {
         val groupd = groupData(usersd)
 
         println(jsonify(groupd))
+    }
+
+    fun getFinishedData(settings: String){
+        val output = console("net user")
+        val usersd = userData(output)
+        val groupd = groupData(usersd)
+        val parser: Parser = Parser()
+        val inputStream: InputStream = File(settings).inputStream()
+        val stringBuilder: StringBuilder = StringBuilder(inputStream.bufferedReader().use{it.readText()})
+        val json: JsonObject = parser.parse(stringBuilder) as JsonObject
+
+
+        println(jsonify(groupd,
+                json.array<String>("elevated_users")!!,
+                json.array<String>("elevated_groups")!!))
     }
 
 
