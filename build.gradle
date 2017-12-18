@@ -3,7 +3,7 @@ apply plugin: 'kotlin'
 apply plugin: 'application'
 
 group 'com.platano.quienes'
-version '2.1.0'
+version '2.1.1'
 defaultTasks 'jar'
 
 mainClassName = 'com.platano.quienes.main'

@@ -111,12 +111,7 @@ class windows {
     }
 
     fun jsonify(groups_data: MutableMap<String, MutableList<String>>, elevated_users: JsonArray<String>, elevated_groups: JsonArray<String>): String{
-        println("This is the new jsonify method")
         var json_data = "{ \"userdata\": {"
-
-
-        println("This is the elevated groups: $elevated_groups")
-        println("This is the elevated users : $elevated_users")
 
         groups_data.forEach {
             var data = "\"${it.key}\": {"
@@ -168,7 +163,6 @@ class windows {
 
         json_data = json_data.dropLast(1)
         json_data += "}}"
-        println(json_data)
         return json_data
     }
 
@@ -190,9 +184,9 @@ class windows {
         val json: JsonObject = parser.parse(stringBuilder) as JsonObject
 
 
-        jsonify(groupd,
+        println(jsonify(groupd,
                 json.array<String>("elevated_users")!!,
-                json.array<String>("elevated_groups")!!)
+                json.array<String>("elevated_groups")!!))
     }
 
 
